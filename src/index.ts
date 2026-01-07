@@ -2,6 +2,7 @@ import express from 'express';
 import cors from "cors";
 
 import subjectsRouter from "./routes/subjects";
+import securityMiddleware from "./middleware/security";
 
 const app = express();
 const PORT = 8000;
@@ -17,6 +18,8 @@ app.use(cors({
 app.use(express.json());
 
 app.use('/api/subjects', subjectsRouter)
+
+app.use(securityMiddleware);
 
 app.get('/', (req, res) => {
   res.send('Hello, welcome to the Classroom API!');
